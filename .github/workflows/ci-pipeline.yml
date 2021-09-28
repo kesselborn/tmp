@@ -1,0 +1,41 @@
+name: foo
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+  OS: linux
+  ARCH: amd64
+  HELM_VERSION: 3.6.3
+
+
+jobs:
+  run_tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      checks: write
+
+    steps:
+      - name: Set environment variables
+        run: |
+          for _ in $(seq 0 20)
+          do
+            printf "." >&2
+            sleep 2
+          done
