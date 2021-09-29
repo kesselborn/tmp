@@ -32,6 +32,9 @@ jobs:
       checks: write
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
     - name: Prepare junit report
       id: cargo_reporter 
       uses:  innoq/action-cargo-test-report@main
