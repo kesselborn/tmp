@@ -1,9 +1,6 @@
 { "type": "suite", "event": "started", "test_count": 5 }
-
 { "type": "test", "event": "started", "name": "project::admission_webhook_tests::it_should_fail_if_template_vals_are_missing" }
 { "type": "test", "name": "project::admission_webhook_tests::it_should_fail_if_template_vals_are_missing", "event": "ok", "exec_time": 5.993672835 }
-
 { "type": "test", "event": "started", "name": "project::manifest_secrets::it_should_skip_annotated_manifests" }
 { "type": "test", "name": "project::manifest_secrets::it_should_skip_annotated_manifests", "event": "failed", "exec_time": 11.907006213, "stdout": "thread 'project::manifest_secrets::it_should_skip_annotated_manifests' panicked at 'assertion failed: `(left == right)`\n  left: `0`,\n right: `42`: all manifests should be skipped', tests/project/manifest_secrets.rs:305:5\n" }
-
 { "type": "suite", "event": "failed", "passed": 1, "failed": 1, "allowed_fail": 1, "ignored": 1, "measured": 0, "filtered_out": 0, "exec_time": 288.027298281 }
