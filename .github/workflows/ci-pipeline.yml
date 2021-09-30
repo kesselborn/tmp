@@ -49,3 +49,4 @@ jobs:
         fail_on_failure: true
         require_tests: true
         summary: ${{ steps.cargo_reporter.outputs.summary }}
+        report_paths: './junit-reports/*.xml'
