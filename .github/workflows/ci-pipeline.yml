@@ -39,7 +39,7 @@ jobs:
       id: cargo_reporter 
       uses:  innoq/action-cargo-test-report@main
       with:
-        cargo-test-report-json: 'results.json'
+        cargo-test-report-json: 'results-with-all-states.json'
 
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v2
