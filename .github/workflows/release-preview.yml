@@ -1,0 +1,37 @@
+on:
+  push:
+    tags:
+      - "v[0-9].[0-9]+.[0-9]+"
+
+jobs:
+  release:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_BRANCH: gh-pages
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name:
+      run: |
+        cp *.html *.js /tmp
+        git checkout ${RELEASE_BRANCH}
+        cp /tmp/*.html *.js .
+        
+        # https://docs.github.com/en/enterprise-server@3.2/actions/learn-github-actions/environment-variables#default-environment-variables
+        cat<<EOF>version.txt
+        git sha: ${GITHUB_SHA}
+        git tag: ${GITHUB_REF}
+        date: $(date)
+        EOF
+
+        git config user.email "noone@github.com"
+
+        git add .
+        git commit -m "Release: $(echo version.txt|tr '\n' ',')"
+        git push origin gh-pages
+
