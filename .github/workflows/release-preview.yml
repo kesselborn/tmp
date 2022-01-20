@@ -1,3 +1,5 @@
+name: release
+
 on:
   push:
     tags:
@@ -19,7 +21,7 @@ jobs:
     - name:
       run: |
         tmpdir=$(mktemp -d /tmp/foo.XXXXXX)
-        cp *.html *.js *.txt ${tmpdir}
+        cp *.html *.js *.txt ${tmpdir} || true
         git checkout ${RELEASE_BRANCH}
         cp ${tmpdir}/* .
 
