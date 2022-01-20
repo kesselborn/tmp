@@ -1,9 +1,9 @@
-name: release-preview
+name: release
 
 on:
   push:
     tags:
-      - "v[0-9].[0-9]+.[0-9]+-*"
+      - "v[0-9].[0-9]+.[0-9]+"
 
 jobs:
   release:
@@ -23,13 +23,11 @@ jobs:
     - name:
       run: |
         tmpdir=$(mktemp -d /tmp/foo.XXXXXX)
-        cp *.html *.js *.txt ${tmpdir} || true
+        cp -a *.html *.js *.txt preview ${tmpdir} || true
 
         git checkout ${RELEASE_BRANCH}
-        rm -rf preview
-        mkdir preview
-        cd preview
-        cp ${tmpdir}/* .
+        rm -rf *
+        cp -a ${tmpdir}/* .
 
         # https://docs.github.com/en/enterprise-server@3.2/actions/learn-github-actions/environment-variables#default-environment-variables
         cat<<EOF>version.txt
