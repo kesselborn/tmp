@@ -23,9 +23,10 @@ jobs:
     - name:
       run: |
         tmpdir=$(mktemp -d /tmp/foo.XXXXXX)
-        cp -a *.html *.js *.txt preview ${tmpdir} || true
+        cp -a *.html *.js *.txt ${tmpdir} || true
 
         git checkout ${RELEASE_BRANCH}
+        cp -a preview ${tmpdir}
         rm -rf *
         cp -a ${tmpdir}/* .
 
