@@ -25,12 +25,13 @@ jobs:
         tmpdir=$(mktemp -d /tmp/foo.XXXXXX)
         cp *.html *.js *.txt ${tmpdir} || true
         git checkout ${RELEASE_BRANCH}
+        rm -rf *
         cp ${tmpdir}/* .
 
         # https://docs.github.com/en/enterprise-server@3.2/actions/learn-github-actions/environment-variables#default-environment-variables
         cat<<EOF>version.txt
         git sha: ${GITHUB_SHA}
-        git tag: ${GITHUB_REF}
+        git tag: $(basename ${GITHUB_REF})
         date: $(date)
         EOF
 
@@ -38,6 +39,6 @@ jobs:
         git config user.name "Release Bot"
 
         git add .
-        git commit -m "Release: $(echo version.txt|tr '\n' ',')"
+        git commit -m "Release: $(cat version.txt|tr '\n' ','|tr -s ' ')"
         git push origin gh-pages
 
