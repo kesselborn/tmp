@@ -34,7 +34,8 @@ jobs:
         date: $(date)
         EOF
 
-        git config user.email "noone@github.com"
+        git config user.email "noone@example.com"
+        git config user.name "Release Bot"
 
         git add .
         git commit -m "Release: $(echo version.txt|tr '\n' ',')"
